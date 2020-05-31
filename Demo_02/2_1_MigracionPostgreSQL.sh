@@ -3,10 +3,11 @@
 # https://flywaydb.org/documentation
 # https://flywaydb.org/documentation/database/postgresql
 # https://flywaydb.org/documentation/database/sqlserver
+# https://www.postgresqltutorial.com/psql-commands/
+# https://github.com/microsoft/azuredatastudio-postgresql/issues/145
 
 # SQL Server        : jdbc:sqlserver://<host>:<port>;databaseName=<database>
 # PostgreSQL        : jdbc:postgresql://<host>:<port>/<database>?<key1>=<value1>&<key2>=<value2>...
-
 
 docker container run \
     --name SQLServer-Demo \
@@ -23,6 +24,7 @@ docker container run \
     --env 'POSTGRES_PASSWORD=CmdL1n3-r0ck5'\
     --env PGDATA=/var/lib/postgresql/data/pgdata \
     --volume vlm_PG-Data:/var/lib/postgresql/data \
+    --publish 5432:5432 \
     --detach postgres:13-alpine
 
 # Connecting to PostgreSQL using Docker
