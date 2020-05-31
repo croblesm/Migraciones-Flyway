@@ -1,0 +1,38 @@
+# Demo 02
+
+# https://flywaydb.org/documentation
+# https://flywaydb.org/documentation/database/postgresql
+# https://flywaydb.org/documentation/database/sqlserver
+
+# SQL Server        : jdbc:sqlserver://<host>:<port>;databaseName=<database>
+# PostgreSQL        : jdbc:postgresql://<host>:<port>/<database>?<key1>=<value1>&<key2>=<value2>...
+
+
+docker container run \
+    --name SQLServer-Demo \
+    --hostname SQLServer-Demo \
+    --env 'ACCEPT_EULA=Y' \
+    --env 'MSSQL_SA_PASSWORD=CmdL1n3-r0ck5' \
+    --volume vlm_SQL-Data:/var/opt/mssql \
+    --publish 1400:1433 \
+    --detach mcr.microsoft.com/mssql/server:2019-CU3-ubuntu-18.04
+
+docker container run \
+    --name PostgreSQL-Demo \
+    --hostname PostgreSQL-Demo \
+    --env 'POSTGRES_PASSWORD=CmdL1n3-r0ck5'\
+    --env PGDATA=/var/lib/postgresql/data/pgdata \
+    --volume vlm_PG-Data:/var/lib/postgresql/data \
+    --detach postgres:13-alpine
+
+# Connecting to PostgreSQL using Docker
+docker exec -it PostgreSQL-Demo psql -U postgres
+
+# Connecting to PostgreSQL using pssql
+docker run -it --rm --network host postgres:13-alpine psql -h 172.17.0.2 -U postgres
+docker run -it --rm --network host postgres:13-alpine psql "postgresql://postgres:CmdL1n3-r0ck5@172.17.0.2:5432"
+
+docker run -it --rm --network host postgres:13-alpine psql "postgresql://postgres:$PGPASSWORD@172.17.0.2"
+
+# Connecting to SQL Server using sqlcmd
+docker run -it --rm --network host mssql-alpine sqlcmd -S localhost,1400 -U sa -P 'CmdL1n3-r0ck5'

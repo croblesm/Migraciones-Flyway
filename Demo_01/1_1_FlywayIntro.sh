@@ -3,11 +3,12 @@
 # https://hub.docker.com/r/flyway/flyway
 # https://github.com/flyway/flyway-docker
 
-cd ~/Documents/DBA\ Mastery/Migraciones-Flyway;
-SQLScripts=~/Documents/DBA\ Mastery/Migraciones-Flyway/Demo_01/SQLScripts;
+cd ~/Documents/Migraciones-Flyway;
+SQLScripts=~/Documents/Migraciones-Flyway/Demo_01/SQLScripts;
+ConfigFile=~/Documents/Migraciones-Flyway/Demo_01/ConfigFile;
 
 # Create a test image by running Flyway
-docker run --rm flyway/flyway 
+docker container run --rm flyway/flyway 
 
 # Commands
 # --------
@@ -19,11 +20,19 @@ docker run --rm flyway/flyway
 # baseline : Baselines an existing database at the baselineVersion
 # repair   : Repairs the schema history table
 
-# Execute a Flyway instance
-docker container run --rm flyway/flyway -url=jdbc:h2:mem:test -user=sa info
+# Getting migration info
+docker container run --rm flyway/flyway -url=jdbc:h2:mem:FlyWay-Test -user=sa info
 
-# Getting real
-
+# Getting started with an empty migration
 docker container run --rm \
     --volume $SQLScripts:/flyway/sql \
-    flyway/flyway -url=jdbc:h2:mem:test -user=sa migrate
+    flyway/flyway -url=jdbc:h2:mem:FlyWay-Test -user=sa migrate
+
+# Creating a conf file
+code $ConfigFile/flyway.conf
+
+# Getting started with an empty migration
+docker container run --rm \
+    --volume $SQLScripts:/flyway/sql \
+    --volume $ConfigFile:/flyway/conf \
+    flyway/flyway migrate
