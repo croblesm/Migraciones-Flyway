@@ -5,6 +5,7 @@
 # https://flywaydb.org/documentation/database/sqlserver
 # https://www.postgresqltutorial.com/psql-commands/
 # https://github.com/microsoft/azuredatastudio-postgresql/issues/145
+# https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/
 
 # SQL Server        : jdbc:sqlserver://<host>:<port>;databaseName=<database>
 # PostgreSQL        : jdbc:postgresql://<host>:<port>/<database>?<key1>=<value1>&<key2>=<value2>...
@@ -33,8 +34,14 @@ docker exec -it PostgreSQL-Demo psql -U postgres
 # Connecting to PostgreSQL using pssql
 docker run -it --rm --network host postgres:13-alpine psql -h 172.17.0.2 -U postgres
 docker run -it --rm --network host postgres:13-alpine psql "postgresql://postgres:CmdL1n3-r0ck5@172.17.0.2:5432"
+docker run -it --rm --network host postgres:13-alpine psql "postgresql://postgres:CmdL1n3-r0ck5@172.17.0.2:5432/worldregions"
 
 docker run -it --rm --network host postgres:13-alpine psql "postgresql://postgres:$PGPASSWORD@172.17.0.2"
 
 # Connecting to SQL Server using sqlcmd
 docker run -it --rm --network host mssql-alpine sqlcmd -S localhost,1400 -U sa -P 'CmdL1n3-r0ck5'
+
+docker container run --rm \
+    --volume $SQLScripts:/flyway/sql \
+    --volume $ConfigFile:/flyway/conf \
+    flyway/flyway migrate

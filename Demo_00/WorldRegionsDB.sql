@@ -2,6 +2,14 @@
 -- DEMO 0 --
 -- 1- Create and populate worldregions database
 ---------------------------------------------------------------------------------
+
+-- Drop database
+SELECT pg_terminate_backend(pg_stat_activity.pid)
+FROM pg_stat_activity
+WHERE pg_stat_activity.datname = 'worldregions';
+
+DROP DATABASE worldregions;
+
 -- Create database
 CREATE DATABASE WorldRegions;
 ALTER DATABASE WorldRegions OWNER TO postgres;
