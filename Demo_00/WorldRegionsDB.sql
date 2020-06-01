@@ -11,9 +11,9 @@ WHERE pg_stat_activity.datname = 'worldregions';
 DROP DATABASE worldregions;
 
 -- Create database
-CREATE DATABASE WorldRegions;
-ALTER DATABASE WorldRegions OWNER TO postgres;
-SET SEARCH_PATH TO worldregions;
+CREATE DATABASE worldregions;
+ALTER DATABASE worldregions OWNER TO postgres;
+--SET SEARCH_PATH TO worldregions;
 
 -- Create sequence for regions table
 CREATE SEQUENCE regions_seq;

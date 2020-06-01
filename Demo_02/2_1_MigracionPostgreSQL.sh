@@ -10,6 +10,10 @@
 # SQL Server        : jdbc:sqlserver://<host>:<port>;databaseName=<database>
 # PostgreSQL        : jdbc:postgresql://<host>:<port>/<database>?<key1>=<value1>&<key2>=<value2>...
 
+cd ~/Documents/Migraciones-Flyway;
+SQLScripts=~/Documents/Migraciones-Flyway/Demo_02/SQLScripts;
+ConfigFile=~/Documents/Migraciones-Flyway/Demo_02/ConfigFile;
+
 docker container run \
     --name SQLServer-Demo \
     --hostname SQLServer-Demo \
@@ -26,20 +30,35 @@ docker container run \
     --env PGDATA=/var/lib/postgresql/data/pgdata \
     --volume vlm_PG-Data:/var/lib/postgresql/data \
     --publish 5432:5432 \
-    --detach postgres:13-alpine
+    --detach postgres:12-alpine
 
 # Connecting to PostgreSQL using Docker
 docker exec -it PostgreSQL-Demo psql -U postgres
 
 # Connecting to PostgreSQL using pssql
-docker run -it --rm --network host postgres:13-alpine psql -h 172.17.0.2 -U postgres
-docker run -it --rm --network host postgres:13-alpine psql "postgresql://postgres:CmdL1n3-r0ck5@172.17.0.2:5432"
-docker run -it --rm --network host postgres:13-alpine psql "postgresql://postgres:CmdL1n3-r0ck5@172.17.0.2:5432/worldregions"
+docker run -it --rm --network host postgres:12-alpine psql -h 172.17.0.2 -U postgres
+docker run -it --rm --network host postgres:12-alpine psql "postgresql://postgres:CmdL1n3-r0ck5@172.17.0.2:5432"
+docker run -it --rm --network host postgres:12-alpine psql "postgresql://postgres:CmdL1n3-r0ck5@172.17.0.2:5432/WorldRegions"
 
-docker run -it --rm --network host postgres:13-alpine psql "postgresql://postgres:$PGPASSWORD@172.17.0.2"
+docker run -it --rm --network host postgres:12-alpine psql "postgresql://postgres:$PGPASSWORD@172.17.0.2"
 
 # Connecting to SQL Server using sqlcmd
 docker run -it --rm --network host mssql-alpine sqlcmd -S localhost,1400 -U sa -P 'CmdL1n3-r0ck5'
+
+docker container run --rm \
+    --volume $SQLScripts:/flyway/sql \
+    --volume $ConfigFile:/flyway/conf \
+    flyway/flyway info
+
+docker container run --rm \
+    --volume $SQLScripts:/flyway/sql \
+    --volume $ConfigFile:/flyway/conf \
+    flyway/flyway baseline
+
+docker container run --rm \
+    --volume $SQLScripts:/flyway/sql \
+    --volume $ConfigFile:/flyway/conf \
+    flyway/flyway info
 
 docker container run --rm \
     --volume $SQLScripts:/flyway/sql \

@@ -4,5 +4,5 @@
 ---------------------------------------------------------------------------------
 
 -- Create database
-CREATE DATABASE WorldRegions;
+CREATE DATABASE worldregions;
 ALTER DATABASE WorldRegions OWNER TO postgres;

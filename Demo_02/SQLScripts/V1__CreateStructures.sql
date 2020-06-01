@@ -19,5 +19,5 @@ CREATE TABLE countries (
 	country_name varchar(64) NULL,
 	region_id int NOT NULL,
     PRIMARY KEY (country_id),
-    FOREIGN KEY (region_id) REFERENCES regions (id)
+    FOREIGN KEY (region_id) REFERENCES regions (region_id)
 );
