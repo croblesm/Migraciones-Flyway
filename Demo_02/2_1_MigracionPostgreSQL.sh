@@ -1,5 +1,6 @@
 # Demo 02
 
+# https://blog.ghostinthemachines.com/2015/03/01/how-to-use-gpg-command-line/
 # https://flywaydb.org/documentation
 # https://flywaydb.org/documentation/database/postgresql
 # https://flywaydb.org/documentation/database/sqlserver
@@ -38,8 +39,7 @@ docker exec -it PostgreSQL-Demo psql -U postgres
 # Connecting to PostgreSQL using pssql
 docker run -it --rm --network host postgres:12-alpine psql -h 172.17.0.2 -U postgres
 docker run -it --rm --network host postgres:12-alpine psql "postgresql://postgres:CmdL1n3-r0ck5@172.17.0.2:5432"
-docker run -it --rm --network host postgres:12-alpine psql "postgresql://postgres:CmdL1n3-r0ck5@172.17.0.2:5432/WorldRegions"
-
+docker run -it --rm --network host postgres:12-alpine psql "postgresql://postgres:CmdL1n3-r0ck5@172.17.0.2:5432/worldregions"
 docker run -it --rm --network host postgres:12-alpine psql "postgresql://postgres:$PGPASSWORD@172.17.0.2"
 
 # Connecting to SQL Server using sqlcmd
@@ -64,3 +64,13 @@ docker container run --rm \
     --volume $SQLScripts:/flyway/sql \
     --volume $ConfigFile:/flyway/conf \
     flyway/flyway migrate
+
+#gpg -e -r "carlos" flyway.conf
+#gpg -d -q flyway.conf.gpg | flyway info
+
+docker container run --rm \
+    --volume $SQLScripts:/flyway/sql \
+    --volume $ConfigFile:/flyway/conf \
+    flyway/flyway info
+
+flyway -configFiles=flyway.conf.alt info
