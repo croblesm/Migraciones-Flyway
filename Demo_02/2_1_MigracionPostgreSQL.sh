@@ -27,7 +27,8 @@ docker container run \
 docker container run \
     --name PostgreSQL-Demo \
     --hostname PostgreSQL-Demo \
-    --env 'POSTGRES_PASSWORD=CmdL1n3-r0ck5'\
+    --env POSTGRES_DB=worldregions \
+    --env 'POSTGRES_PASSWORD=CmdL1n3-r0ck5' \
     --env PGDATA=/var/lib/postgresql/data/pgdata \
     --volume vlm_PG-Data:/var/lib/postgresql/data \
     --publish 5432:5432 \
