@@ -1,4 +1,14 @@
-# Demo 02
+# Demo 02 - PostgreSQL Migration - New database
+# 
+#   1- Downloading Flyway command-line tool
+#   2- Getting familiar with Flyway (Docker | App)
+#       Flyway info
+#       Flyway migrate   
+# -----------------------------------------------------------------------------
+# Reference:
+#   https://hub.docker.com/r/flyway/flyway
+#   https://github.com/flyway/flyway-docker
+#   https://flywaydb.org/download/#downloads
 
 # https://blog.ghostinthemachines.com/2015/03/01/how-to-use-gpg-command-line/
 # https://flywaydb.org/documentation
