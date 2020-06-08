@@ -1,4 +1,4 @@
-# Demo 01 - Introduccion a Flyway
+# Demo 02 - Migraciones con bases de datos nuevas
 
 * Create Azure Container Registry
 * List ACR registry

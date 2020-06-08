@@ -115,3 +115,8 @@ docker container run --rm \
     --volume $SQLScripts:/flyway/sql \
     --volume $ConfigFile:/flyway/conf \
     flyway/flyway migrate
+
+docker container run --rm \
+    --volume $SQLScripts:/flyway/sql \
+    --volume $ConfigFile:/flyway/conf \
+    flyway/flyway clean
