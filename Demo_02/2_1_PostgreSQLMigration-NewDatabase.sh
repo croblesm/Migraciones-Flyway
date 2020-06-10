@@ -37,7 +37,6 @@ docker container run \
     --hostname PostgreSQL-Demo \
     --env POSTGRES_DB=worldregions \
     --env 'POSTGRES_PASSWORD=CmdL1n3-r0ck5' \
-    --env PGDATA=/var/lib/postgresql/data/pgdata \
     --volume vlm_PG-Data:/var/lib/postgresql/data \
     --publish 5432:5432 \
     --detach postgres:12-alpine
@@ -74,7 +73,7 @@ code ./ConfigFile/flyway.conf
 code ./SQLScripts/V1__CreateStructures.sql;
 
 # 5- Flyway migration files and structure
-# Initilizing
+# Initializing
 docker container run --rm \
     --volume $SQLScripts:/flyway/sql \
     --volume $ConfigFile:/flyway/conf \
@@ -115,6 +114,8 @@ docker container run --rm \
     --volume $SQLScripts:/flyway/sql \
     --volume $ConfigFile:/flyway/conf \
     flyway/flyway migrate
+
+# Azure Data Studio
 
 docker container run --rm \
     --volume $SQLScripts:/flyway/sql \

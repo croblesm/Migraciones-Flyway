@@ -18,7 +18,6 @@ ConfigFile=~/Documents/Migraciones-Flyway/Demo_01/ConfigFile;
 # macOS 
 # brew install flyway
 
-
 # Local command-line tool
 flyway
 
@@ -43,7 +42,6 @@ docker container run --rm flyway/flyway -url=jdbc:h2:mem:FlyWay-Test -user=sa in
 flyway info -url=jdbc:h2:mem:FlyWay-Test -user=sa -password=s3cr3t
 
 # Flyway migration
-
 Demo_01
 ├── ConfigFile
 │   └── flyway.conf
