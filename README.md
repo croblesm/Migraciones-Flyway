@@ -18,7 +18,6 @@ En esta sesión introductoria, te ofreceré un tutorial rápido sobre como poner
 ## **Demos**  
 * [Introduccion a Flyway](Demo_01)
 * [Migraciones con bases de datos nuevas](Demo_02)
-* [Migraciones con bases de datos existentes](Demo_03)
 
 ## Preguntas?
 En caso tengas alguna duda o comentario, no dudes en contactarme a mi correo <crobles@dbamastery.com>
