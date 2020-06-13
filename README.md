@@ -8,7 +8,7 @@ Flyway es una herramienta open source de migraciones de bases de datos, que perm
 En esta sesión introductoria, te ofreceré un tutorial rápido sobre como ponerse en marchar con Flyway. Compartiendo ejemplos de cómo iniciar migraciones desde cero, siempre conociendo el estado, descripción y detalles de cada uno de los cambios implementados a nuestras bases de datos.
 
 ## Grabacion de YouTube
-[![Webinar - Docker Guatemala](https://img.youtube.com/vi/7To43SLkqLI/hqdefault.jpg)](https://youtu.be/7To43SLkqLI "Migraciones de bases de datos con Flyway")
+[![Webinar - Docker Guatemala](https://img.youtube.com/vi/vHqunEf-fPs/hqdefault.jpg)](https://youtu.be/vHqunEf-fPs "Migraciones de bases de datos con Flyway")
 
 ## **Prerrequisitos**  
 * Descargar [Flyway comand-line](https://flywaydb.org/download/) | [container](https://hub.docker.com/r/flyway/flyway)
