@@ -1,13 +1,14 @@
 # Demo 02 - Migraciones con bases de datos nuevas
 
-* Create Azure Container Registry
-* List ACR registry
-* Inspect Dockerfile
-* Build local image - mssqltools
-* Tag and push local image to ACR repository
-* Check ACR repositories + images with VS Code Docker extension
-* Build and push image with **Azure Cloud shell** (single instruction)
-* List images in ACR repository
+* Create PostgreSQL container with worldregions database
+* Connect to PostgreSQL using psql (within Docker)
+* Execute basic PostgreSQL commands
+* Flyway migration files and structure
+* Flyway migration V1
+* Flyway migration V2
+* Check PostgreSQL worldregions migrations
+* Clean all migrations
+* Check PostgreSQL worldregions schema
 
 ## Preguntas?
 En caso tengas alguna duda o comentario, no dudes en contactarme a mi correo <crobles@dbamastery.com>

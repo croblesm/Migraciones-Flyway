@@ -1,35 +1,31 @@
 # Demo 02 - PostgreSQL Migration - New database
 # 
-#   1- Downloading Flyway command-line tool
-#   2- Getting familiar with Flyway (Docker | App)
-#       Flyway info
-#       Flyway migrate   
+#   1- Create PostgreSQL container with worldregions database
+#   2- Connect to PostgreSQL using psql (within Docker)
+#   3- Execute basic PostgreSQL commands
+#   4- Flyway migration files and structure
+#   5- Flyway migration V1
+#   6- Flyway migration V2
+#   7- Check PostgreSQL worldregions migrations
+#   8- Clean all migrations
+#   9- Check PostgreSQL worldregions schema
 # -----------------------------------------------------------------------------
 # Reference:
-#   https://hub.docker.com/r/flyway/flyway
-#   https://github.com/flyway/flyway-docker
-#   https://flywaydb.org/download/#downloads
-
-# https://blog.ghostinthemachines.com/2015/03/01/how-to-use-gpg-command-line/
-# https://flywaydb.org/documentation
-# https://flywaydb.org/documentation/database/postgresql
-# https://flywaydb.org/documentation/database/sqlserver
-# https://www.postgresqltutorial.com/psql-commands/
-# https://github.com/microsoft/azuredatastudio-postgresql/issues/145
-# https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/
-
-# SQL Server        : jdbc:sqlserver://<host>:<port>;databaseName=<database>
-# PostgreSQL        : jdbc:postgresql://<host>:<port>/<database>?<key1>=<value1>&<key2>=<value2>...
-
-# Cleanup
-# dkrm PostgreSQL-Demo;
-# docker volume rm vlm_PG-Data;
-# mv ./SQLScripts/V2__LoadData.sql ./SQLScripts/--V2__LoadData.sql;
+#   open https://flywaydb.org/documentation/
+#   open https://github.com/flyway/flyway-docker
+#   open https://hub.docker.com/r/flyway/flyway
+#
+# JDBC URL
+# SQL Server:       jdbc:sqlserver://<host>:<port>;databaseName=<database>
+# PostgreSQL:       jdbc:postgresql://<host>:<port>/<database>?<key1>=<value1>&<key2>=<value2>
 
 # 0- Env variables | demo path
 cd ~/Documents/Migraciones-Flyway/Demo_02;
 SQLScripts=~/Documents/Migraciones-Flyway/Demo_02/SQLScripts;
 ConfigFile=~/Documents/Migraciones-Flyway/Demo_02/ConfigFile;
+# dkrm PostgreSQL-Demo;
+# docker volume rm vlm_PG-Data;
+# mv ./SQLScripts/V2__LoadData.sql ./SQLScripts/--V2__LoadData.sql;
 
 # 1- Create PostgreSQL container with worldregions database
 docker container run \
@@ -45,7 +41,6 @@ docker container run \
 docker exec -it PostgreSQL-Demo psql -U postgres -d worldregions
 
 # 3- Execute basic PostgreSQL commands
-
 # List all databases
 # psql command: \list | \l
 SELECT datname FROM pg_database;
@@ -72,7 +67,7 @@ code ./ConfigFile/flyway.conf
 # Explore SQL Scripts
 code ./SQLScripts/V1__CreateStructures.sql;
 
-# 5- Flyway migration files and structure
+# 5- Flyway migration V1
 # Initializing
 docker container run --rm \
     --volume $SQLScripts:/flyway/sql \
@@ -91,6 +86,7 @@ docker container run --rm \
     --volume $ConfigFile:/flyway/conf \
     flyway/flyway info
 
+# 6- Flyway migration V2
 # Add more scripts
 code ./SQLScripts/--V2__LoadData.sql;
 mv ./SQLScripts/--V2__LoadData.sql ./SQLScripts/V2__LoadData.sql;
@@ -115,9 +111,18 @@ docker container run --rm \
     --volume $ConfigFile:/flyway/conf \
     flyway/flyway migrate
 
-# Azure Data Studio
+# --------------------------------------
+# Azure Data Studio step
+# --------------------------------------
+# 7- Check worldregions schema changes
 
+# 8- Clean all migrations
 docker container run --rm \
     --volume $SQLScripts:/flyway/sql \
     --volume $ConfigFile:/flyway/conf \
     flyway/flyway clean
+
+# --------------------------------------
+# Azure Data Studio step
+# --------------------------------------
+# 9- Check PostgreSQL worldregions schema

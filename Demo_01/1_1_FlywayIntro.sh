@@ -2,14 +2,16 @@
 # 
 #   1- Downloading Flyway command-line tool
 #   2- Getting familiar with Flyway (Docker | App)
-#       Flyway info
-#       Flyway migrate   
+#   3- Flyway info
+#   4- Flyway migrate
+#   5- Flyway migrate + configuration file
 # -----------------------------------------------------------------------------
 # Reference:
-#   https://hub.docker.com/r/flyway/flyway
-#   https://github.com/flyway/flyway-docker
-#   https://flywaydb.org/download/#downloads
+#   open https://flywaydb.org/documentation/
+#   open https://github.com/flyway/flyway-docker
+#   open https://hub.docker.com/r/flyway/flyway
 
+# 0- Env variables | demo path
 cd ~/Documents/Migraciones-Flyway/Demo_01;
 SQLScripts=~/Documents/Migraciones-Flyway/Demo_01/SQLScripts;
 ConfigFile=~/Documents/Migraciones-Flyway/Demo_01/ConfigFile;
@@ -17,8 +19,10 @@ ConfigFile=~/Documents/Migraciones-Flyway/Demo_01/ConfigFile;
 # 1- Downloading Flyway command-line tool
 # macOS 
 # brew install flyway
+open https://flywaydb.org/download/
 
-# Local command-line tool
+# 2- Getting familiar with Flyway (Docker | App)
+# Local command-line
 flyway
 
 # Docker container
@@ -34,14 +38,15 @@ docker container run --rm flyway/flyway
     # baseline : Baselines an existing database at the baselineVersion
     # repair   : Repairs the schema history table
 
-# Flyway info
+# 3- Flyway info
+# Local command-line
+flyway info -url=jdbc:h2:mem:FlyWay-Test -user=sa -password=s3cr3t
+
 # Docker container
 docker container run --rm flyway/flyway -url=jdbc:h2:mem:FlyWay-Test -user=sa info
 
-# Local command-line tool
-flyway info -url=jdbc:h2:mem:FlyWay-Test -user=sa -password=s3cr3t
-
-# Flyway migration
+# 4- Flyway migrate
+# Folder structure
 Demo_01
 ├── ConfigFile
 │   └── flyway.conf
@@ -51,13 +56,14 @@ Demo_01
 # Dummy SQL script
 code $SQLScripts/V1__FlywayIntroduction.sql
 
-# flyway.locations must be modifed with local command-line
-code $ConfigFile/flyway.conf
-
 # Database migration (dummy)
 docker container run --rm \
     --volume $SQLScripts:/flyway/sql \
     flyway/flyway -url=jdbc:h2:mem:FlyWay-Test -user=sa migrate
+
+# 5- Flyway migrate + configuration file
+# Explore Configuration file reference
+code ./flyway.conf
 
 # Flyway Configuration file
 # Creating a conf file
